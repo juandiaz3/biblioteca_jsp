@@ -4,20 +4,21 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
-@Entity
-public class Director extends Persona implements Serializable {
+//@Entity
+public class DirectorHerencia extends PersonaHerencia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private String idDirector;
 	
-	public Director() {
+	public DirectorHerencia() {
 		super();
 		createCodigo();
 	}
 	
-	public Director(String nombre, String primerApellido, String segundoApellido, String lugarNacimiento, List<Libro> libros) {
+	public DirectorHerencia(String nombre, String primerApellido, String segundoApellido, String lugarNacimiento, List<Libro> libros) {
 		super(nombre, primerApellido, segundoApellido, lugarNacimiento);
 		createCodigo();
 	}

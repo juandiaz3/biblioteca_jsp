@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.springjsp.basico.entity.Autor;
+import com.springjsp.basico.entity.AutorHerencia;
 import com.springjsp.basico.service.IAutorService;
 
 @Controller
@@ -60,13 +60,13 @@ public class IndexController {
 	@GetMapping(value="/nuevoAutor")
 	public String nuevoAutor(Model model) {
 		
-		model.addAttribute("autor", new Autor());
+		model.addAttribute("autor", new AutorHerencia());
 		
 		return "autor/nuevo";
 	}
 	
 	@PostMapping(value="/nuevoAutor")
-	public String nuevoAutorPost(@ModelAttribute Autor autor, BindingResult result, RedirectAttributes attributes) {
+	public String nuevoAutorPost(@ModelAttribute AutorHerencia autor, BindingResult result, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			System.out.println("Se ha producido un error " + result.toString());

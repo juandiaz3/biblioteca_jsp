@@ -5,17 +5,17 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.springjsp.basico.entity.Autor;
+import com.springjsp.basico.entity.AutorHerencia;
 
 public interface AutorRepository {
 	
-	public List<Autor> findAll();
+	public List<AutorHerencia> findAll();
 	
-	public List<Autor> findByNameAndByPrimerApellido(String name, String primerApellido);
+	public List<AutorHerencia> findByNameAndByPrimerApellido(String name, String primerApellido);
 	
-	public Autor getAutorByName(String name);
+	public AutorHerencia getAutorByName(String name);
 	
-	public Boolean saveAutor(Autor autor);
+	public Boolean saveAutor(AutorHerencia autor);
 	
 
 }

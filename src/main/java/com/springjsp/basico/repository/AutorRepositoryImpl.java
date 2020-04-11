@@ -9,40 +9,40 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Repository;
 
-import com.springjsp.basico.entity.Autor;
+import com.springjsp.basico.entity.AutorHerencia;
 
 @Repository
 public class AutorRepositoryImpl implements AutorRepository {
 	
 	private static Log logger = LogFactory.getLog(AutorRepositoryImpl.class);
 	
-	private List<Autor> listaAutores;
+	private List<AutorHerencia> listaAutores;
 	
 	public AutorRepositoryImpl() {
 		this.listaAutores = createListAutores();
 	}
 
 	@Override
-	public List<Autor> findAll() {
+	public List<AutorHerencia> findAll() {
 		
 		return listaAutores;
 	}
 	
 	@Override
-	public List<Autor> findByNameAndByPrimerApellido(String name, String primerApellido) {
+	public List<AutorHerencia> findByNameAndByPrimerApellido(String name, String primerApellido) {
 		
 		return listaAutores.stream().filter(autor -> autor.getNombre().equals(name)).collect(Collectors.toList());
 	}
 
 	@Override
-	public Autor getAutorByName(String name) {
-		Autor a = listaAutores.stream().filter(autor->autor.getNombre().equals(name)).findFirst().orElse(null);
+	public AutorHerencia getAutorByName(String name) {
+		AutorHerencia a = listaAutores.stream().filter(autor->autor.getNombre().equals(name)).findFirst().orElse(null);
 				
 		return a;
 	}
 	
 	@Override
-	public Boolean saveAutor(Autor autor) {
+	public Boolean saveAutor(AutorHerencia autor) {
 		
 		try {
 			listaAutores.add(autor);
@@ -54,15 +54,15 @@ public class AutorRepositoryImpl implements AutorRepository {
 		return false;
 	}
 	
-	private List<Autor> createListAutores(){
+	private List<AutorHerencia> createListAutores(){
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
 		
-		List<Autor> listaAutores = null;
+		List<AutorHerencia> listaAutores = null;
 		
 		try {
 			listaAutores = new ArrayList<>();
 			
-			Autor autor1 = new Autor();
+			AutorHerencia autor1 = new AutorHerencia();
 			autor1.setNombre("Juan");
 			autor1.setPrimerApellido("García");
 			autor1.setSegundoApellido("Mouriño");
@@ -70,7 +70,7 @@ public class AutorRepositoryImpl implements AutorRepository {
 			autor1.setLugarNacimiento("A Coruña");
 			listaAutores.add(autor1);
 			
-			Autor autor2 = new Autor();
+			AutorHerencia autor2 = new AutorHerencia();
 			autor2.setNombre("Jose");
 			autor2.setPrimerApellido("Gómez");
 			autor2.setSegundoApellido("Atrezo");
@@ -78,7 +78,7 @@ public class AutorRepositoryImpl implements AutorRepository {
 			autor2.setLugarNacimiento("Santander");
 			listaAutores.add(autor2);
 			
-			Autor autor3 = new Autor();
+			AutorHerencia autor3 = new AutorHerencia();
 			autor3.setNombre("María");
 			autor3.setPrimerApellido("Sanesteban");
 			autor3.setSegundoApellido("Picazo");

@@ -13,29 +13,29 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public abstract class Persona implements Serializable {
+//@Entity
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public abstract class PersonaHerencia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.TABLE)
 	private int idPersona;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;
-	@Temporal(TemporalType.DATE)
+//	@Temporal(TemporalType.DATE)
 	private Date fechaNacimiento;
 	private String lugarNacimiento;
 	
-	public Persona() {
+	public PersonaHerencia() {
 		this.idPersona = this.idPersona++;
 	}
 	
-	public Persona(String nombre, String primerApellido, String segundoApellido, String lugarNacimiento) {
+	public PersonaHerencia(String nombre, String primerApellido, String segundoApellido, String lugarNacimiento) {
 		this();
 		this.nombre = nombre;
 		this.primerApellido = primerApellido;
@@ -44,7 +44,7 @@ public abstract class Persona implements Serializable {
 		this.lugarNacimiento = lugarNacimiento;
 	}
 
-	public Persona(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento,
+	public PersonaHerencia(String nombre, String primerApellido, String segundoApellido, Date fechaNacimiento,
 			String lugarNacimiento) {
 		this();
 		this.nombre = nombre;

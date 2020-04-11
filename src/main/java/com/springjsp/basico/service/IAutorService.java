@@ -2,16 +2,16 @@ package com.springjsp.basico.service;
 
 import java.util.List;
 
-import com.springjsp.basico.entity.Autor;
+import com.springjsp.basico.entity.AutorHerencia;
 
 public interface IAutorService {
 	
-	public List<Autor> findAll();
+	public List<AutorHerencia> findAll();
 	
-	public List<Autor> findByNameAndByPrimerApellido(String nombre, String primerApellido);
+	public List<AutorHerencia> findByNameAndByPrimerApellido(String nombre, String primerApellido);
 	
-	public Autor findByName(String name);
+	public AutorHerencia findByName(String name);
 	
-	public Boolean save(Autor autor);
+	public Boolean save(AutorHerencia autor);
 
 }
