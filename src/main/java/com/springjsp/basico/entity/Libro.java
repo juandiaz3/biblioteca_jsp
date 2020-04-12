@@ -22,7 +22,9 @@ public class Libro implements Serializable {
 	private int idLibro;
 	@Column(nullable = false)
 	private String titulo;
-	private String editorial;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Editorial editorial;
 	private String portada;
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Autor autor;
@@ -46,11 +48,11 @@ public class Libro implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public String getEditorial() {
+	public Editorial getEditorial() {
 		return editorial;
 	}
 
-	public void setEditorial(String editorial) {
+	public void setEditorial(Editorial editorial) {
 		this.editorial = editorial;
 	}
 

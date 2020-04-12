@@ -60,7 +60,7 @@
 									<td>${autor.segundoApellido}</td>
 									<td><fmt:formatDate value="${autor.fechaNacimiento}" pattern="dd-MM-yyyy" /></td>
 									<td>${autor.lugarNacimiento}</td>
-									<td><a class="btn btn-sm btn-primary" href="detalle/${autor.nombre}">Ver detalle</a></td>
+									<td><a class="btn btn-sm btn-primary" href="detalle/${autor.idAutor}">Ver detalle</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

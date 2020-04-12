@@ -7,42 +7,44 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import com.springjsp.basico.entity.AutorHerencia;
+import com.springjsp.basico.entity.Autor;
 
 @Repository
-public class AutorRepositoryImpl implements AutorRepository {
+@Qualifier("AutorRepositoryPrueba")
+public class AutorRepositoryPruebaImpl implements AutorRepository {
 	
-	private static Log logger = LogFactory.getLog(AutorRepositoryImpl.class);
+	private static Log logger = LogFactory.getLog(AutorRepositoryPruebaImpl.class);
 	
-	private List<AutorHerencia> listaAutores;
+	private List<Autor> listaAutores;
 	
-	public AutorRepositoryImpl() {
+	public AutorRepositoryPruebaImpl() {
 		this.listaAutores = createListAutores();
 	}
 
 	@Override
-	public List<AutorHerencia> findAll() {
+	public List<Autor> findAll() {
 		
 		return listaAutores;
 	}
 	
 	@Override
-	public List<AutorHerencia> findByNameAndByPrimerApellido(String name, String primerApellido) {
+	public List<Autor> findByNameAndByPrimerApellido(String name, String primerApellido) {
 		
 		return listaAutores.stream().filter(autor -> autor.getNombre().equals(name)).collect(Collectors.toList());
 	}
 
 	@Override
-	public AutorHerencia getAutorByName(String name) {
-		AutorHerencia a = listaAutores.stream().filter(autor->autor.getNombre().equals(name)).findFirst().orElse(null);
+	public Autor getAutorByName(String name) {
+		Autor a = listaAutores.stream().filter(autor->autor.getNombre().equals(name)).findFirst().orElse(null);
 				
 		return a;
 	}
 	
 	@Override
-	public Boolean saveAutor(AutorHerencia autor) {
+	public Boolean saveAutor(Autor autor) {
 		
 		try {
 			listaAutores.add(autor);
@@ -54,15 +56,15 @@ public class AutorRepositoryImpl implements AutorRepository {
 		return false;
 	}
 	
-	private List<AutorHerencia> createListAutores(){
+	private List<Autor> createListAutores(){
 		SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
 		
-		List<AutorHerencia> listaAutores = null;
+		List<Autor> listaAutores = null;
 		
 		try {
 			listaAutores = new ArrayList<>();
 			
-			AutorHerencia autor1 = new AutorHerencia();
+			Autor autor1 = new Autor();
 			autor1.setNombre("Juan");
 			autor1.setPrimerApellido("García");
 			autor1.setSegundoApellido("Mouriño");
@@ -70,7 +72,7 @@ public class AutorRepositoryImpl implements AutorRepository {
 			autor1.setLugarNacimiento("A Coruña");
 			listaAutores.add(autor1);
 			
-			AutorHerencia autor2 = new AutorHerencia();
+			Autor autor2 = new Autor();
 			autor2.setNombre("Jose");
 			autor2.setPrimerApellido("Gómez");
 			autor2.setSegundoApellido("Atrezo");
@@ -78,7 +80,7 @@ public class AutorRepositoryImpl implements AutorRepository {
 			autor2.setLugarNacimiento("Santander");
 			listaAutores.add(autor2);
 			
-			AutorHerencia autor3 = new AutorHerencia();
+			Autor autor3 = new Autor();
 			autor3.setNombre("María");
 			autor3.setPrimerApellido("Sanesteban");
 			autor3.setSegundoApellido("Picazo");
@@ -88,8 +90,6 @@ public class AutorRepositoryImpl implements AutorRepository {
 		}catch(Exception e) {
 		
 		}
-		
-		
 		
 		return listaAutores;
 	}
