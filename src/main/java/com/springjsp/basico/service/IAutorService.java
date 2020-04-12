@@ -15,5 +15,7 @@ public interface IAutorService {
 	public Autor findById(int idAutor);
 	
 	public Autor save(Autor autor);
+	
+	public void delete(Integer idAutor);
 
 }

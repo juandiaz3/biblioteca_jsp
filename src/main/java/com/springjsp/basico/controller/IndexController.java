@@ -50,9 +50,9 @@ public class IndexController {
 	}
 	
 	@GetMapping(value="/detalle/{id}")
-	public String mostrarDetalle(@PathVariable("id") String id, Model model) {
+	public String mostrarDetalle(@PathVariable("id") Integer id, Model model) {
 		
-		model.addAttribute("autor", autorService.findById(Integer.parseInt(id)));
+		model.addAttribute("autor", autorService.findById(id));
 		
 		return "detalle";
 	}
@@ -79,7 +79,7 @@ public class IndexController {
 			
 		autorService.save(autor);
 		
-		attributes.addFlashAttribute("msgExito", "El nuevo autor se ha creado");
+		attributes.addFlashAttribute("mensaje", "El nuevo autor se ha creado");
 		
 		return "redirect:/home";
 	}
@@ -88,6 +88,27 @@ public class IndexController {
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, "fechaNacimiento", new CustomDateEditor(dateFormat, false));
+	}
+	
+	@GetMapping(value="/editar/{idAutor}")
+	public String editarAutor(@PathVariable("idAutor") Integer idAutor, Model model) {
+		
+		if(idAutor > 0) {
+			model.addAttribute("autor", autorService.findById(idAutor));
+		}else
+			return "redirect:/home";
+		
+		return "autor/nuevo";
+	}
+	
+	@GetMapping(value = "/borrar/{idAutor}")
+	public String borrarAutor(@PathVariable("idAutor") Integer idAutor, RedirectAttributes attributes) {
+		
+		if(idAutor > 0) {
+			autorService.delete(idAutor);
+		}
+		attributes.addFlashAttribute("mensaje", "El autor ha sido eliminado");
+		return "redirect:/home";
 	}
 
 }

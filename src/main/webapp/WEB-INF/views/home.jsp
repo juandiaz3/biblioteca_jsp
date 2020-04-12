@@ -10,6 +10,7 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>Página principal</title>
+<spring:url value="/autor" var="urlAutor" />
 </head>
 <body>
 
@@ -33,8 +34,8 @@
 		
 	<div class="container">
 	
-		<c:if test="${msgExito != null}">
-			<div class="alert alert-success" role="alert">${msgExito}</div>
+		<c:if test="${mensaje != null}">
+			<div class="alert alert-success" role="alert">${mensaje}</div>
 		</c:if>
 	
 		<div class="row">
@@ -50,6 +51,8 @@
 								<td>Fecha nacimiento</td>
 								<td>Lugar de nacimiento</td>
 								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -61,6 +64,8 @@
 									<td><fmt:formatDate value="${autor.fechaNacimiento}" pattern="dd-MM-yyyy" /></td>
 									<td>${autor.lugarNacimiento}</td>
 									<td><a class="btn btn-sm btn-primary" href="detalle/${autor.idAutor}">Ver detalle</a></td>
+									<td><a class="btn btn-sm btn-primary" href="editar/${autor.idAutor}">Editar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="borrar/${autor.idAutor}">Borrar</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>

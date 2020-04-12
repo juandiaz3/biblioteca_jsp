@@ -9,6 +9,7 @@
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <title>Insert title here</title>
+<spring:url value="/nuevoAutor" var="urlFormAutor" />
 </head>
 <body>
 
@@ -24,7 +25,8 @@
 			</div>
 		</spring:hasBindErrors>
 
-		<form:form action="nuevoAutor" method="post" modelAttribute="autor" >
+		<form:form action="${urlFormAutor}" method="post" modelAttribute="autor" >
+			<form:hidden path="idAutor" name="idAutor" />
 			<div class="form-group">
 				<label for="inputNombre">Nombre</label>
 				<form:input type="text" path="nombre" class="form-control" id="nombre" name="nombre" placeholder="Introduzca el nombre" />

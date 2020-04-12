@@ -48,5 +48,10 @@ public class AutorServiceImpl implements IAutorService {
 		return autorRepository.save(autor);
 	}
 
+	@Override
+	public void delete(Integer idAutor) {
+		autorRepository.deleteById(idAutor);
+	}
+
 	
 }
