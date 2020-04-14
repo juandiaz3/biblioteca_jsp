@@ -23,7 +23,7 @@ public class LibroController {
 	@GetMapping(value="/indexLibros")
 	public String listaLibros() {
 		
-		return "libro/formLibro";
+		return "libro/indexLibros";
 	}
 	
 	@GetMapping(value="/nuevo")

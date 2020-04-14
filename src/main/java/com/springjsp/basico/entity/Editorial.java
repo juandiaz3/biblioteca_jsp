@@ -26,7 +26,7 @@ public class Editorial implements Serializable {
 	private String nombre;
 	private String pais;
 	
-	@OneToMany(mappedBy = "editorial", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "editorial", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Libro> libros;
 	
 	public Editorial() {
