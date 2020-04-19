@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ include file="../includes/init.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<spring:url value="/resources" var="urlPublic" />
+<link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >
 </head>
 <body>
 
@@ -21,8 +26,9 @@
 					<ul>
 						<li>${libro.idLibro}</li>
 						<li>${libro.titulo}</li>
-						<li>${libro.editorial}</li>
+						<li>${libro.editorial.nombre}</li>
 						<li>${libro.portada}</li>
+						<li>${libro.autor.nombre} ${libro.autor.primerApellido} ${libro.autor.segundoApellido}</li>
 					</ul>
 				</div>
 			</div>

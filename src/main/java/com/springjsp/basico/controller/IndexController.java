@@ -25,6 +25,7 @@ import com.springjsp.basico.entity.Autor;
 import com.springjsp.basico.service.IAutorService;
 
 @Controller
+@RequestMapping(value = "/autores")
 public class IndexController {
 	
 	@Autowired

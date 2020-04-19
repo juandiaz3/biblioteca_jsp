@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ include file="includes/init.jsp" %>
 
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >
 </head>
 <body>
+
+<div class="container">
 
 	<jsp:include page="includes/menu.jsp"></jsp:include>
 
@@ -65,15 +67,11 @@
 									<td>${autor.nombre}</td>
 									<td>${autor.primerApellido}</td>
 									<td>${autor.segundoApellido}</td>
-									<td><fmt:formatDate value="${autor.fechaNacimiento}"
-											pattern="dd-MM-yyyy" /></td>
+									<td><fmt:formatDate value="${autor.fechaNacimiento}" pattern="dd-MM-yyyy" /></td>
 									<td>${autor.lugarNacimiento}</td>
-									<td><a class="btn btn-sm btn-primary"
-										href="detalle/${autor.idAutor}">Ver detalle</a></td>
-									<td><a class="btn btn-sm btn-primary"
-										href="editar/${autor.idAutor}">Editar</a></td>
-									<td><a class="btn btn-sm btn-primary"
-										href="borrar/${autor.idAutor}">Borrar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="detalle/${autor.idAutor}">Ver detalle</a></td>
+									<td><a class="btn btn-sm btn-primary" href="editar/${autor.idAutor}">Editar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="borrar/${autor.idAutor}">Borrar</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -87,6 +85,9 @@
 
 		<a class="btn btn-sm btn-primary" href="nuevoAutor">Nuevo autor</a>
 	</div>
+	
+	<jsp:include page="includes/footer.jsp"></jsp:include>
+</div>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,63 +1,103 @@
 package com.springjsp.basico.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.springjsp.basico.entity.Autor;
+import com.springjsp.basico.entity.Editorial;
 import com.springjsp.basico.entity.Libro;
+import com.springjsp.basico.service.IAutorService;
+import com.springjsp.basico.service.IEditorialService;
+import com.springjsp.basico.service.ILibroService;
 
 @Controller
 public class LibroController {
 	
+	@Autowired
+	private  ILibroService libroService;
+	
+	@Autowired
+	private IAutorService autorService;
+	
+	@Autowired
+	private IEditorialService editorialService;
+	
 	@GetMapping(value="/indexLibros")
-	public String listaLibros() {
+	public String listaLibros(Model model) {
+		
+		model.addAttribute("libros", libroService.findAll());
 		
 		return "libro/indexLibros";
 	}
 	
-	@GetMapping(value="/nuevo")
-	public String detalle(@ModelAttribute Libro libro) {
+	@GetMapping(value = "/detalle/{idLibro}")
+	public String detalleLibro(@PathVariable("idLibro") int idLibro, Model model) {
+		
+		Libro libro = libroService.findById(idLibro);
+		model.addAttribute("libro", libro);
+		
+		return "libro/detalleLibro";
+	}
+	
+	@GetMapping(value="/nuevoLibro")
+	public String detalle(@ModelAttribute Libro libro, Model model) {
+		
+		List<Autor> autores = autorService.findAll();
+		List<Editorial> editoriales = editorialService.findAll();
+		model.addAttribute("autores", autores);
+		model.addAttribute("editoriales", editoriales);
 		
 		return "libro/formLibro";
 	}
 	
 	@PostMapping(value = "/nuevoLibro")
-	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, @RequestParam("portada") MultipartFile portada, RedirectAttributes attributes) {
+//	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, @RequestParam("portada") MultipartFile portada, RedirectAttributes attributes) {
+	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
-			return "formLibro";
+			return "libro/formLibro";
 		}
 		
-		if(!portada.isEmpty()) {
-			// Ruta de almacenamiento de las imágenes
-			Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
-			// String para concatenar el nombre del archivo
-			String rootPath = directorioRecursos.toFile().getAbsolutePath();
-			
-			try {
-				// Obtener los bytes del archivo
-				byte[] bytes = portada.getBytes();
-				Path rutaCompleta = Paths.get(rootPath + "//" + portada.getOriginalFilename());
-				Files.write(rutaCompleta, bytes);
-				attributes.addFlashAttribute("info", "Has subido el archivo " + portada.getOriginalFilename());
-				
-				libro.setPortada(portada.getOriginalFilename());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//		if(!portada.isEmpty()) {
+//			// Ruta de almacenamiento de las imágenes
+//			Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
+//			// String para concatenar el nombre del archivo
+//			String rootPath = directorioRecursos.toFile().getAbsolutePath();
+//			
+//			try {
+//				// Obtener los bytes del archivo
+//				byte[] bytes = portada.getBytes();
+//				Path rutaCompleta = Paths.get(rootPath + "//" + portada.getOriginalFilename());
+//				Files.write(rutaCompleta, bytes);
+//				attributes.addFlashAttribute("info", "Has subido el archivo " + portada.getOriginalFilename());
+//				
+//				libro.setPortada(portada.getOriginalFilename());
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+		
+		System.out.println("Libro editorial " + libro.toString());
+//		System.out.println("Libro autor " + libro.getAutor().getIdAutor());
+		
+		try {
+			libroService.save(libro);
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
+		
+		
+		attributes.addFlashAttribute("mensaje", "El libro se ha creado correctamente");
 		
 		return "redirect:/indexLibros";
 	}

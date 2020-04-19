@@ -1,4 +1,7 @@
-<spring:url value="includes/menu.jsp" var="urlMenu" />
+<%@ include file="../includes/init.jsp" %>
+
+<spring:url value="/indexLibros" var="urlIndexLibros" />
+<spring:url value="/autores/home" var="urlIndexAutores" />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Biblioteca</a>
@@ -7,9 +10,9 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="/indexLibros">Libros<span class="sr-only">(current)</span></a>
-      <a class="nav-item nav-link" href="/home">Autores</a>
-      <a class="nav-item nav-link" href="#">Editoriales</a>
+      <a class="nav-item nav-link active" href="${urlIndexLibros}">Libros<span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="${urlIndexAutores}">Autores</a>
+      <a class="nav-item nav-link" href="${urlIndexLibros}">Editoriales</a>
     </div>
   </div>
 </nav>

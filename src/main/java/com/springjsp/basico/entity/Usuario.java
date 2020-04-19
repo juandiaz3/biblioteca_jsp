@@ -2,22 +2,16 @@ package com.springjsp.basico.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//@Entity
+@Entity
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,7 +32,7 @@ public class Usuario implements Serializable {
 //			joinColumns=@JoinColumn(name="idUsuario"), 
 //			inverseJoinColumns = @JoinColumn(name="idPerfil")
 //	)
-	private List<Perfil> perfiles;
+//	private List<Perfil> perfiles;
 	
 	public Usuario() {
 	}
@@ -91,19 +85,19 @@ public class Usuario implements Serializable {
 		this.fechaRegistro = fechaRegistro;
 	}
 
-	public List<Perfil> getPerfiles() {
-		return perfiles;
-	}
-
-	public void setPerfiles(List<Perfil> perfiles) {
-		this.perfiles = perfiles;
-	}
+//	public List<Perfil> getPerfiles() {
+//		return perfiles;
+//	}
+//
+//	public void setPerfiles(List<Perfil> perfiles) {
+//		this.perfiles = perfiles;
+//	}
 	
-	public void agregarPerfil(Perfil perfil) {
-		if(perfiles == null) {
-			perfiles = new LinkedList<>();
-		}
-		perfiles.add(perfil);
-	}
+//	public void agregarPerfil(Perfil perfil) {
+//		if(perfiles == null) {
+//			perfiles = new LinkedList<>();
+//		}
+//		perfiles.add(perfil);
+//	}
 
 }

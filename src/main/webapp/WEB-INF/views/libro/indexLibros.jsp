@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ include file="../includes/init.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Libros</title>
-<spring:url value="../includes/menu.jsp" var="urlMenu" />
+<spring:url value="/resources" var="urlPublic" />
+<link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >
 </head>
 <body>
 
-<jsp:include page="${urlMenu}"></jsp:include>
+<jsp:include page="../includes/menu.jsp"></jsp:include>
 
 	<div class="container">
 		<div class="row">
@@ -54,16 +54,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${autores}" var="autor">
+							<c:forEach items="${libros}" var="libro">
 								<tr>
-									<td>${autor.nombre}</td>
-									<td>${autor.primerApellido}</td>
-									<td>${autor.segundoApellido}</td>
-									<td><fmt:formatDate value="${autor.fechaNacimiento}" pattern="dd-MM-yyyy" /></td>
-									<td>${autor.lugarNacimiento}</td>
-									<td><a class="btn btn-sm btn-primary" href="detalle/${autor.idAutor}">Ver detalle</a></td>
-									<td><a class="btn btn-sm btn-primary" href="editar/${autor.idAutor}">Editar</a></td>
-									<td><a class="btn btn-sm btn-primary" href="borrar/${autor.idAutor}">Borrar</a></td>
+									<td>${libro.titulo}</td>
+									<td>${libro.portada}</td>
+									<td>${libro.editorial.nombre}</td>
+									<td>${libro.autor.nombre} ${libro.autor.primerApellido} ${libro.autor.segundoApellido}</td>
+									<td><a class="btn btn-sm btn-primary" href="detalle/${libro.idLibro}">Ver detalle</a></td>
+									<td><a class="btn btn-sm btn-primary" href="editar/${libro.idLibro}">Editar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="borrar/${libro.idLibro}">Borrar</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -72,7 +71,7 @@
 			</div>
 		</div>
 		
-		<a class="btn btn-sm btn-primary" href="nuevoAutor">Nuevo autor</a>
+		<a class="btn btn-sm btn-primary" href="nuevoLibro">Nuevo libro</a>
 	</div>
 
 
