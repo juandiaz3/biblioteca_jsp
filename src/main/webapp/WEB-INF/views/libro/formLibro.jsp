@@ -30,18 +30,19 @@
 		</spring:hasBindErrors>
 	
 		<form:form action="${urlFormLibro}" method="post" enctype="multipart/form-data" modelAttribute="libro" >
+			<form:hidden path="idLibro" />
 			<div class="form-group">
 				<label for="titulo">Titulo</label>
 				<form:input class="form-control" type="text" id="titulo" path="titulo" />
 			</div>
 			<div class="form-group">
 				<label for="editorial">Editorial</label>
-				<select id="editorial" class="form-control" path="libro.editorial">
-					<option value="no_creado"></option>
+				<form:select id="editorial" class="form-control" path="editorial">
+					
 						<c:forEach items="${editoriales}" var="editorial">
-							<option value="${editorial}">${editorial.nombre}</option>
+							<form:option value="${editorial.idEditorial}">${editorial.nombre}</form:option>
 						</c:forEach>
-				</select>
+				</form:select>
 			</div>
 <!-- 			<div class="form-group"> -->
 <!-- 				<label for="inputPortada">Autor</label> -->
@@ -53,12 +54,12 @@
 			</div>
 			<div class="form-group">
 				<label for="selAutor">Autor</label>
-				<select id="selAutor" class="form-control" path="libro.autor">
-					<option value="no_creado"></option>
+				<form:select id="selAutor" class="form-control" path="autor">
+					
 					<c:forEach items="${autores}" var="autor">
-						<option value="${autor}">${autor.nombre} ${autor.primerApellido} ${autor.segundoApellido}</option>
+						<form:option value="${autor.idAutor}">${autor.nombre} ${autor.primerApellido} ${autor.segundoApellido}</form:option>
 					</c:forEach>
-				</select>
+				</form:select>
 			</div>
 			
 			<button type="submit" class="btn btn-primary">Crear</button>

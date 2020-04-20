@@ -87,17 +87,41 @@ public class LibroController {
 //			}
 //		}
 		
-		System.out.println("Libro editorial " + libro.toString());
-//		System.out.println("Libro autor " + libro.getAutor().getIdAutor());
-		
 		try {
 			libroService.save(libro);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		
-		
 		attributes.addFlashAttribute("mensaje", "El libro se ha creado correctamente");
+		
+		return "redirect:/indexLibros";
+	}
+	
+	@GetMapping(value = "/modificarLibro/{idLibro}")
+	public String modificarLibro(@PathVariable("idLibro") int idLibro, Model model) {
+		
+		if(idLibro > 0) {
+			model.addAttribute("libro", libroService.findById(idLibro));
+		}else {
+			return "redirect:/indexLibros";
+		}
+		
+		List<Autor> autores = autorService.findAll();
+		List<Editorial> editoriales = editorialService.findAll();
+		model.addAttribute("autores", autores);
+		model.addAttribute("editoriales", editoriales);
+		
+		return "libro/formLibro";
+	}
+	
+	@GetMapping(value = "/borrarLibro/{idLibro}")
+	public String borrarLibro(@PathVariable("idLibro") Integer idLibro, RedirectAttributes attributes) {
+		
+		if(idLibro > 0) {
+			libroService.delete(idLibro);
+			attributes.addFlashAttribute("mensaje", "El libro se ha borrado correctamente");
+		}
 		
 		return "redirect:/indexLibros";
 	}

@@ -61,8 +61,8 @@
 									<td>${libro.editorial.nombre}</td>
 									<td>${libro.autor.nombre} ${libro.autor.primerApellido} ${libro.autor.segundoApellido}</td>
 									<td><a class="btn btn-sm btn-primary" href="detalle/${libro.idLibro}">Ver detalle</a></td>
-									<td><a class="btn btn-sm btn-primary" href="editar/${libro.idLibro}">Editar</a></td>
-									<td><a class="btn btn-sm btn-primary" href="borrar/${libro.idLibro}">Borrar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="modificarLibro/${libro.idLibro}">Editar</a></td>
+									<td><a class="btn btn-sm btn-primary" href="borrarLibro/${libro.idLibro}">Borrar</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
