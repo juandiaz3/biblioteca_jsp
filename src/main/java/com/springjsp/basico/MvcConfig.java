@@ -8,6 +8,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -24,6 +25,14 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addResourceLocations("/resources/");
 	}
 	
+	/* Registrar un controlador de vistas */
+	
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		
+		registry.addViewController("/error_403").setViewName("errors/error_403");
+	}
+	
 	/* --- Formateado de fecha --- */
 
 	// Resuelve el locale, dónde se va a guardar
@@ -33,7 +42,7 @@ public class MvcConfig implements WebMvcConfigurer {
 		localeResolver.setDefaultLocale(new Locale("es", "ES"));
 		return localeResolver;
 	}
-	
+
 	// Interceptor que se encarga de cambiar el lenguaje
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {

@@ -67,7 +67,7 @@ public class IndexController {
 	}
 	
 	@PostMapping(value="/nuevoAutor")
-	public String nuevoAutorPost(@ModelAttribute Autor autor, BindingResult result, RedirectAttributes attributes) {
+	public String nuevoAutorPost(@Valid @ModelAttribute Autor autor, BindingResult result, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			System.out.println("Se ha producido un error " + result.toString());

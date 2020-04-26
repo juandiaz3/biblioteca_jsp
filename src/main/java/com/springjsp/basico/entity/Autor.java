@@ -31,7 +31,7 @@ public class Autor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idAutor;
 	
-	@NotEmpty
+	@NotEmpty(message = "El campo nombre no puede estar vacío")
 	private String nombre;
 	private String primerApellido;
 	private String segundoApellido;

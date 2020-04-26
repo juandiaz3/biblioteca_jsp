@@ -1,8 +1,13 @@
 package com.springjsp.basico.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +26,8 @@ import com.springjsp.basico.service.ILibroService;
 
 @Controller
 public class LibroController {
+	
+//	private static final Log logger = LogFa
 	
 	@Autowired
 	private  ILibroService libroService;
@@ -124,6 +131,29 @@ public class LibroController {
 		}
 		
 		return "redirect:/indexLibros";
+	}
+	
+	private boolean hasRole(String role) {
+		SecurityContext context = SecurityContextHolder.getContext();
+		
+		if(context == null) {
+			return false;
+		}
+		
+		Authentication auth = context.getAuthentication();
+		
+		if(auth == null) {
+			return false;
+		}
+		
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		for(GrantedAuthority authority : authorities) {
+			if(role.equals(authority.getAuthority())) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 }
