@@ -2,6 +2,7 @@
 
 <spring:url value="/indexLibros" var="urlIndexLibros" />
 <spring:url value="/autores/home" var="urlIndexAutores" />
+<spring:url value="/login" var="urlLogin" />
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Biblioteca</a>
@@ -9,10 +10,14 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav">
+    <div class="navbar-nav mr-auto">
       <a class="nav-item nav-link active" href="${urlIndexLibros}">Libros<span class="sr-only">(current)</span></a>
       <a class="nav-item nav-link" href="${urlIndexAutores}">Autores</a>
       <a class="nav-item nav-link" href="${urlIndexLibros}">Editoriales</a>
+    </div>
+    
+    <div class="navbar-nav navbar-right">
+    	<a class="nav-item nav-link" href="${urlLogin}">Login</a>
     </div>
   </div>
 </nav>

@@ -31,7 +31,7 @@ public class IndexController {
 	@Autowired
 	private IAutorService autorService;
 	
-	@RequestMapping(value="/home", method=RequestMethod.GET)
+	@RequestMapping(value= {"/home", "/"} , method=RequestMethod.GET)
 	public String index(Model model){
 		model.addAttribute("titulo", "Listado de autores");
 		model.addAttribute("autores", autorService.findAll());
