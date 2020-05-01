@@ -1,64 +1,55 @@
 package com.springjsp.basico.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "users")
 public class Usuario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idUsuario;
-	private String nombre;
-	private String email;
+	private Long id;
+	
+	@Column(length = 50, unique = true)
 	private String username;
-	private String estatus;
-	@Column(name="fecha_registro")
-	@Temporal(TemporalType.DATE)
-	private Date fechaRegistro;
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	@JoinTable(
-//			name="UsuarioPerfil", 
-//			joinColumns=@JoinColumn(name="idUsuario"), 
-//			inverseJoinColumns = @JoinColumn(name="idPerfil")
-//	)
-//	private List<Perfil> perfiles;
+	
+	@Column(length = 60)
+	private String password;
+	
+	private Boolean enabled;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "userid")
+	private List<Role> roles;
+	
+//	@Column(name="fecha_registro")
+//	@Temporal(TemporalType.DATE)
+//	private Date fechaRegistro;
+
 	
 	public Usuario() {
 	}
 
-	public int getIdUsuario() {
-		return idUsuario;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -69,20 +60,28 @@ public class Usuario implements Serializable {
 		this.username = username;
 	}
 
-	public String getEstatus() {
-		return estatus;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setEstatus(String estatus) {
-		this.estatus = estatus;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public Date getFechaRegistro() {
-		return fechaRegistro;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setFechaRegistro(Date fechaRegistro) {
-		this.fechaRegistro = fechaRegistro;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 
 //	public List<Perfil> getPerfiles() {
