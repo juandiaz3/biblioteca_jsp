@@ -23,15 +23,12 @@
 		<div class="row">
 			<form class="form-inline" action="filtrarAutor" method="post">
 				<div class="form-group">
-					<label for="inputFiltrarNombre">Nombre</label> <input type="text"
-						class="form-control" id="inputFiltrarNombre"
-						name="inputFiltrarNombre" placeholder="Introduzca el nombre">
+					<label for="inputFiltrarNombre">Nombre</label>
+					<input type="text" class="form-control" id="inputFiltrarNombre" name="inputFiltrarNombre" placeholder="Introduzca el nombre" />
 				</div>
 				<div class="form-group">
-					<label for="inputFiltrarPrimerApellido">Primer apellido</label> <input
-						type="text" class="form-control" id="inputFiltrarPrimerApellido"
-						name="inputFiltrarPrimerApellido"
-						placeholder="Introduzca el primer apellido">
+					<label for="inputFiltrarPrimerApellido">Primer apellido</label>
+					<input type="text" class="form-control" id="inputFiltrarPrimerApellido" name="inputFiltrarPrimerApellido" placeholder="Introduzca el primer apellido" />
 				</div>
 				<button type="submit" class="btn btn-primary">Filtrar</button>
 			</form>

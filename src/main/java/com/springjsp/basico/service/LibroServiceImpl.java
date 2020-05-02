@@ -18,6 +18,12 @@ public class LibroServiceImpl implements ILibroService {
 	public List<Libro> findAll() {
 		return libroRepository.findAll();
 	}
+	
+	@Override
+	public List<Libro> findByTitulo(String titulo) {
+		
+		return libroRepository.findByTitulo(titulo);
+	}
 
 	@Override
 	public Libro findById(int idLibro) {

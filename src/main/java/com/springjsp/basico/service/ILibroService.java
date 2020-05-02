@@ -8,6 +8,8 @@ public interface ILibroService {
 	
 	public List<Libro> findAll();
 	
+	public List<Libro> findByTitulo(String titulo);
+	
 	public Libro findById(int idLibro);
 	
 	public void save(Libro libro);

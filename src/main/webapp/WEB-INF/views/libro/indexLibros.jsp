@@ -19,12 +19,12 @@
 		<div class="row">
 			<form class="form-inline" action="filtrarLibro" method="post" >
 				<div class="form-group">
-					<label for="inputFiltrarNombre">Nombre</label>
-					<input type="text" class="form-control" id="inputFiltrarNombre" name="inputFiltrarNombre" placeholder="Introduzca el nombre">
+					<label for="inputFiltrarTitulo">Título</label>
+					<input type="text" class="form-control" id="inputFiltrarTitulo" name="inputFiltrarTitulo" placeholder="Introduzca el título" />
 				</div>
 				<div class="form-group">
-					<label for="inputFiltrarPrimerApellido">Primer apellido</label>
-					<input type="text" class="form-control" id="inputFiltrarPrimerApellido" name="inputFiltrarPrimerApellido" placeholder="Introduzca el primer apellido">
+					<label for="inputFiltrarAutor">Autor (no implementado)</label>
+					<input type="text" class="form-control" id="inputFiltrarAutor" name="inputFiltrarAutor" placeholder="Introduzca el autor" />
 				</div>
 				<button type="submit" class="btn btn-primary">Filtrar</button>
 			</form>
@@ -39,7 +39,7 @@
 	
 		<div class="row">
 			<div class="panel panel-default">
-				<div class="panel-heading">Lista de autores</div>
+				<div class="panel-heading">Listado de libros</div>
 				<div class="panel-body">
 					<table class="table table-striped">
 						<thead>
@@ -67,8 +67,8 @@
 									<td><a class="btn btn-sm btn-primary" href="detalle/${libro.idLibro}">Ver detalle</a></td>
 									
 									<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
-										<td><a class="btn btn-sm btn-primary" href="libros/modificarLibro/${libro.idLibro}">Editar</a></td>
-										<td><a class="btn btn-sm btn-primary" href="libros/borrarLibro/${libro.idLibro}">Borrar</a></td>
+										<td><a class="btn btn-sm btn-primary" href="modificarLibro/${libro.idLibro}">Editar</a></td>
+										<td><a class="btn btn-sm btn-primary" href="borrarLibro/${libro.idLibro}">Borrar</a></td>
 									</sec:authorize>
 									
 								</tr>
