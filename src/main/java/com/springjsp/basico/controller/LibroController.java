@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -15,6 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springjsp.basico.entity.Autor;
@@ -25,6 +29,7 @@ import com.springjsp.basico.service.IEditorialService;
 import com.springjsp.basico.service.ILibroService;
 
 @Controller
+@RequestMapping(value = "/libros")
 public class LibroController {
 	
 //	private static final Log logger = LogFa
@@ -56,10 +61,12 @@ public class LibroController {
 	}
 	
 	@GetMapping(value="/nuevoLibro")
-	public String detalle(@ModelAttribute Libro libro, Model model) {
+//	public String detalle(@ModelAttribute Libro libro, Model model) {
+	public String nuevo(Model model) {
 		
 		List<Autor> autores = autorService.findAll();
 		List<Editorial> editoriales = editorialService.findAll();
+		model.addAttribute("libro", new Libro());
 		model.addAttribute("autores", autores);
 		model.addAttribute("editoriales", editoriales);
 		
@@ -102,7 +109,7 @@ public class LibroController {
 		
 		attributes.addFlashAttribute("mensaje", "El libro se ha creado correctamente");
 		
-		return "redirect:/indexLibros";
+		return "redirect:/libros/indexLibros";
 	}
 	
 	@GetMapping(value = "/modificarLibro/{idLibro}")
@@ -111,7 +118,7 @@ public class LibroController {
 		if(idLibro > 0) {
 			model.addAttribute("libro", libroService.findById(idLibro));
 		}else {
-			return "redirect:/indexLibros";
+			return "redirect:/libros/indexLibros";
 		}
 		
 		List<Autor> autores = autorService.findAll();
@@ -130,7 +137,7 @@ public class LibroController {
 			attributes.addFlashAttribute("mensaje", "El libro se ha borrado correctamente");
 		}
 		
-		return "redirect:/indexLibros";
+		return "redirect:/libros/indexLibros";
 	}
 	
 	private boolean hasRole(String role) {

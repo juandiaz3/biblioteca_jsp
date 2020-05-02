@@ -1,6 +1,6 @@
 <%@ include file="../includes/init.jsp" %>
 
-<spring:url value="/indexLibros" var="urlIndexLibros" />
+<spring:url value="/libros/indexLibros" var="urlIndexLibros" />
 <spring:url value="/autores/home" var="urlIndexAutores" />
 <spring:url value="/login" var="urlLogin" />
 

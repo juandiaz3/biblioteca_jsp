@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	
 <%@ include file="includes/init.jsp" %>
 
@@ -7,8 +7,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Página principal</title>
+<meta charset="UTF-8">
+<title>PÃ¡gina principal</title>
 <spring:url value="/resources" var="urlPublic" />
 <spring:url value="/autor" var="urlAutor" />
 <link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >

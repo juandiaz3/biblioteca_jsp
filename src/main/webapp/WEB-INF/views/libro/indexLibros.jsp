@@ -66,9 +66,9 @@
 									<td>${libro.autor.nombre} ${libro.autor.primerApellido} ${libro.autor.segundoApellido}</td>
 									<td><a class="btn btn-sm btn-primary" href="detalle/${libro.idLibro}">Ver detalle</a></td>
 									
-									<sec:authorize access="hasAnyAuthority('ADMIN')">
-										<td><a class="btn btn-sm btn-primary" href="modificarLibro/${libro.idLibro}">Editar</a></td>
-										<td><a class="btn btn-sm btn-primary" href="borrarLibro/${libro.idLibro}">Borrar</a></td>
+									<sec:authorize access="hasAnyAuthority('ROLE_ADMIN')">
+										<td><a class="btn btn-sm btn-primary" href="libros/modificarLibro/${libro.idLibro}">Editar</a></td>
+										<td><a class="btn btn-sm btn-primary" href="libros/borrarLibro/${libro.idLibro}">Borrar</a></td>
 									</sec:authorize>
 									
 								</tr>
