@@ -26,4 +26,15 @@ public class EditorialServiceImpl implements IEditorialService{
 		return editorialRepository.findById(idEditorial).orElse(null);
 	}
 
+	@Override
+	public Editorial save(Editorial editorial) {
+		return editorialRepository.save(editorial);
+	}
+
+	@Override
+	public void delete(Integer idEditorial) {
+		editorialRepository.deleteById(idEditorial);
+		
+	}
+
 }

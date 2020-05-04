@@ -37,14 +37,13 @@
 
 		<br>
 
-
+		<c:if test="${mensaje != null}">
+			<div class="row">
+				<div class="alert alert-success" role="alert">${mensaje}</div>
+			</div>
+		</c:if>
 
 		<div class="row">
-
-			<c:if test="${mensaje != null}">
-				<div class="alert alert-success" role="alert">${mensaje}</div>
-			</c:if>
-
 			<div class="panel panel-default">
 				<div class="panel-heading">Lista de autores</div>
 				<div class="panel-body">

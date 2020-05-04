@@ -1,14 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     
 <%@ include file="../includes/init.jsp" %>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Libros</title>
 <spring:url value="/resources" var="urlPublic" />
+<spring:url value="/libros/filtrarLibro" var="urlFiltrarLibro" />
+<spring:url value="/libros/ordenarLibros" var="urlOrdenarLibros" />
 <link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >
 </head>
 <body>
@@ -20,27 +22,39 @@
 		<br>
 		
 		<div class="row">
-			<form class="form-inline" action="filtrarLibro" method="post" >
+			<form:form class="form-inline" action="${urlFiltrarLibro}" method="post" modelAttribute="libroFilter" >
 				<div class="form-group">
-					<label for="inputFiltrarTitulo">T�tulo</label>
-					<input type="text" class="form-control" id="inputFiltrarTitulo" name="inputFiltrarTitulo" placeholder="Introduzca el t�tulo" />
+					<label for="titulo">Título</label>
+					<form:input type="text" class="form-control" id="titulo" name="titulo" path="titulo" placeholder="Introduzca el título" />
 				</div>
 				<div class="form-group">
-					<label for="inputFiltrarAutor">Autor (no implementado)</label>
-					<input type="text" class="form-control" id="inputFiltrarAutor" name="inputFiltrarAutor" placeholder="Introduzca el autor" />
+					<label for="autor">Autor (no implementado)</label>
+					<form:input type="text" class="form-control" id="autor" name="autor" path="autor" placeholder="Introduzca el autor" />
 				</div>
 				<button type="submit" class="btn btn-primary">Filtrar</button>
+			</form:form>
+			
+			<form class="form-inline" action="${urlOrdenarLibros}" method="post" >
+				<div class="form-group">
+					<label for="inputFiltrarTitulo">Título</label>
+					<select class="form-control" id="inputOrdenarLibros" name="inputOrdenarLibros">
+						<option value="titulo asc">Por título ascendente</option>
+						<option value="titulo desc">Por título descendente</option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">Ordenar</button>
 			</form>
 		</div>
 	
 		<br>
 
+		<c:if test="${mensaje != null}">
+			<div class="row">
+				<div class="alert alert-success" role="alert">${mensaje}</div>
+			</div>
+		</c:if>
 
 		<div class="row">
-
-			<c:if test="${mensaje != null}">
-				<div class="alert alert-success" role="alert">${mensaje}</div>
-			</c:if>
 
 			<div class="panel panel-default">
 				<div class="panel-heading">Listado de libros</div>
@@ -48,7 +62,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<td>T�tulo</td>
+								<td>Título</td>
 								<td>Portada</td>
 								<td>Editorial</td>
 								<td>Autor</td>

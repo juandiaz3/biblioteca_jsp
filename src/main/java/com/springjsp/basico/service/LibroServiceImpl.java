@@ -3,6 +3,7 @@ package com.springjsp.basico.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.springjsp.basico.entity.Libro;
@@ -17,6 +18,12 @@ public class LibroServiceImpl implements ILibroService {
 	@Override
 	public List<Libro> findAll() {
 		return libroRepository.findAll();
+	}
+	
+	@Override
+	public List<Libro> findAll(Sort order) {
+		
+		return libroRepository.findAll(order);
 	}
 	
 	@Override

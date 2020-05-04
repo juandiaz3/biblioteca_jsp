@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springjsp.basico.entity.Autor;
 import com.springjsp.basico.entity.Editorial;
 import com.springjsp.basico.entity.Libro;
+import com.springjsp.basico.model.LibroFilter;
 import com.springjsp.basico.service.IAutorService;
 import com.springjsp.basico.service.IEditorialService;
 import com.springjsp.basico.service.ILibroService;
@@ -47,15 +46,28 @@ public class LibroController {
 	@GetMapping(value="/indexLibros")
 	public String listaLibros(Model model) {
 		
+		model.addAttribute("libroFilter", new LibroFilter());
 		model.addAttribute("libros", libroService.findAll());
 		
 		return "libro/indexLibros";
 	}
 	
 	@PostMapping(value = "/filtrarLibro")
-	public String filtrarLibros(@RequestParam("inputFiltrarTitulo") String titulo, @RequestParam("inputFiltrarAutor") String autor, Model model) {
+	public String filtrarLibros(@ModelAttribute LibroFilter libroFilter, Model model) {
 		
-		model.addAttribute("libros", libroService.findByTitulo(titulo));
+		model.addAttribute("libros", libroService.findByTitulo(libroFilter.getTitulo()));
+		
+		return "libro/indexLibros";
+	}
+	
+	@PostMapping(value = "/ordenarLibros")
+	public String ordenarLibros(@RequestParam("inputOrdenarLibros") String ordenLibros, Model model) {
+		
+		if(ordenLibros.equals("titulo asc")) {
+			model.addAttribute("libros", libroService.findAll(Sort.by("titulo")));
+		}else if(ordenLibros.equals("titulo desc")) {
+			model.addAttribute("libros", libroService.findAll(Sort.by("titulo").descending()));
+		}
 		
 		return "libro/indexLibros";
 	}
