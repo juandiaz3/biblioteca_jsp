@@ -40,7 +40,7 @@ public class IndexController {
 	}
 	
 	@PostMapping(value="/filtrarAutor")
-	public @ResponseBody String filtrarAutor(@RequestParam("inputFiltrarNombre") String nombre, @RequestParam("inputFiltrarPrimerApellido") String primerApellido, Model model) {
+	public String filtrarAutor(@RequestParam("inputFiltrarNombre") String nombre, @RequestParam("inputFiltrarPrimerApellido") String primerApellido, Model model) {
 		
 		model.addAttribute("titulo", "Listado de autores");
 		model.addAttribute("autores", autorService.findByNameAndByPrimerApellido(nombre, primerApellido));

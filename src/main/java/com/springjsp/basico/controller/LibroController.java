@@ -53,7 +53,7 @@ public class LibroController {
 	}
 	
 	@PostMapping(value = "/filtrarLibro")
-	public @ResponseBody String filtrarLibros(@RequestParam("inputFiltrarTitulo") String titulo, @RequestParam("inputFiltrarAutor") String autor, Model model) {
+	public String filtrarLibros(@RequestParam("inputFiltrarTitulo") String titulo, @RequestParam("inputFiltrarAutor") String autor, Model model) {
 		
 		model.addAttribute("libros", libroService.findByTitulo(titulo));
 		
