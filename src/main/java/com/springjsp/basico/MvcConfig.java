@@ -2,8 +2,10 @@ package com.springjsp.basico;
 
 import java.util.Locale;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.LocaleResolver;
@@ -17,7 +19,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 	
-	/* Configuración de la carpeta de recursos */
+	/* --- Configuración de la carpeta de recursos --- */
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -26,13 +28,33 @@ public class MvcConfig implements WebMvcConfigurer {
 			.addResourceLocations("/resources/");
 	}
 	
-	/* Registrar un controlador de vistas */
+	/* --- Fin Configuración carpeta recursos --- */
+	
+	/* --- Configuración de Internacionalización --- */
+	
+	@Bean
+	public MessageSource messageSource() {
+		ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+		messageSource.setBasename("classpath:messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		
+		return messageSource;
+	}
+	
+	
+	/* --- Fin Configuración de Internacionalización --- */
+	
+	
+	/* --- Registrar un controlador de vistas --- */
 	
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		
 		registry.addViewController("/error_403").setViewName("errors/error_403");
 	}
+	
+	/* --- Fin Registro controlador de vistas --- */
+	
 	
 	/* --- Formateado de fecha --- */
 

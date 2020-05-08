@@ -58,6 +58,7 @@ public class IndexController {
 	}
 	
 	@GetMapping(value="/nuevoAutor")
+//	public String nuevoAutor(@ModelAttribute Autor autor) {
 	public String nuevoAutor(Model model) {
 		
 		model.addAttribute("autor", new Autor());

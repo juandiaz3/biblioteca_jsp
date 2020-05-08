@@ -8,7 +8,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Página principal</title>
+<!-- <title>Página principal</title> -->
+<title><spring:message code="springjsp.basico.home.titulo" /></title>
 <spring:url value="/resources" var="urlPublic" />
 <spring:url value="/autor" var="urlAutor" />
 <link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css" >
