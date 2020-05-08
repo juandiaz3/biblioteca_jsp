@@ -8,7 +8,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <title>Página principal</title> -->
 <title><spring:message code="springjsp.basico.home.titulo" /></title>
 <spring:url value="/resources" var="urlPublic" />
 <spring:url value="/autor" var="urlAutor" />

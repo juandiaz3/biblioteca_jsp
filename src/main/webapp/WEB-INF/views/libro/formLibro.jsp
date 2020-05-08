@@ -29,7 +29,7 @@
 			</div>
 		</spring:hasBindErrors>
 	
-		<form:form action="${urlFormLibro}" method="post" modelAttribute="libro" >
+		<form:form action="${urlFormLibro}?${_csrf.parameterName}=${_csrf.token}" method="post" modelAttribute="libro" enctype="multipart/form-data" >
 			<form:hidden path="idLibro" name="idLibro" />
 			<div class="form-group">
 				<label for="titulo">Titulo</label>
