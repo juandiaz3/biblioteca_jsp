@@ -1,5 +1,9 @@
 package com.springjsp.basico.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springjsp.basico.entity.Autor;
@@ -95,32 +100,40 @@ public class LibroController {
 	}
 	
 	@PostMapping(value = "/nuevoLibro")
-//	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, @RequestParam("portada") MultipartFile portada, RedirectAttributes attributes) {
-	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, RedirectAttributes attributes) {
+	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, @RequestParam("filePortada") MultipartFile filePortada, RedirectAttributes attributes) {
+//	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			return "libro/formLibro";
 		}
 		
-//		if(!portada.isEmpty()) {
-//			// Ruta de almacenamiento de las imágenes
+		if(!filePortada.isEmpty()) {
+			// Ruta de almacenamiento de las imágenes
 //			Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
-//			// String para concatenar el nombre del archivo
+			// Convertir Path a String
 //			String rootPath = directorioRecursos.toFile().getAbsolutePath();
-//			
-//			try {
-//				// Obtener los bytes del archivo
-//				byte[] bytes = portada.getBytes();
-//				Path rutaCompleta = Paths.get(rootPath + "//" + portada.getOriginalFilename());
-//				Files.write(rutaCompleta, bytes);
-//				attributes.addFlashAttribute("info", "Has subido el archivo " + portada.getOriginalFilename());
-//				
-//				libro.setPortada(portada.getOriginalFilename());
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
+			String rootPath = "C://Temp/uploads";
+			
+			System.out.println("Root path " + rootPath);
+			
+			try {
+				// Obtener los bytes del archivo recibido del formulario
+				byte[] bytes = filePortada.getBytes();
+				// Agregar el nombre del archivo seleccionado a la ruta
+				Path rutaCompleta = Paths.get(rootPath + "//" + filePortada.getOriginalFilename());
+				
+				System.out.println("rutaCompleta " + rutaCompleta);
+				
+				// Escribir el contenido del fichero en el archivo creado
+				Files.write(rutaCompleta, bytes);
+				attributes.addFlashAttribute("info", "Has subido el archivo " + filePortada.getOriginalFilename());
+				
+				libro.setPortada(filePortada.getOriginalFilename());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
 		try {
 			libroService.save(libro);

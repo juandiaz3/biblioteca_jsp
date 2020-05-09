@@ -21,11 +21,16 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	/* --- Configuración de la carpeta de recursos --- */
 	
+	private static final String[] PATH_RESOURCE_LOCATIONS = {
+			"/resources/",
+			"file:/C:/Temp/uploads/"
+	};
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
 			.addResourceHandler("/resources/**")
-			.addResourceLocations("/resources/");
+			.addResourceLocations(PATH_RESOURCE_LOCATIONS);
 	}
 	
 	/* --- Fin Configuración carpeta recursos --- */
@@ -85,12 +90,15 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	
 	/* --- Upload files --- */
+	
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setMaxUploadSize(100000);
 		return multipartResolver;
 	}
+	
+	/* --- Fin configuración Upload files --- */
 	
 	/* --- Configuración Spring Security --- */
 	@Bean

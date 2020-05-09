@@ -49,8 +49,9 @@
 <!-- 				<form:input class="form-control" type="text" id="autorNombre" path="autor" /> -->
 <!-- 			</div> -->
 			<div class="form-group">
-				<label for="portada">Portada</label>
-				<form:input class="form-control" type="text" id="portada" path="portada" name="portada"/>
+				<label for="filePortada">Portada</label>
+<%-- 				<form:input class="form-control" type="text" id="portada" path="portada" name="portada"/> --%>
+				<input class="form-control" type="file" id="filePortada" path="filePortada" name="filePortada"/>
 			</div>
 			<div class="form-group">
 				<label for="autor">Autor</label>
