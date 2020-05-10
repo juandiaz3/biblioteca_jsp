@@ -2,6 +2,8 @@ package com.springjsp.basico;
 
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,8 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 	
+	private final Logger log = LoggerFactory.getLogger(MvcConfig.class);
+	
 	/* --- Configuración de la carpeta de recursos --- */
 	
 	private static final String[] PATH_RESOURCE_LOCATIONS = {
@@ -28,6 +32,9 @@ public class MvcConfig implements WebMvcConfigurer {
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		
+		log.info("Resource locations: " + PATH_RESOURCE_LOCATIONS);
+		
 		registry
 			.addResourceHandler("/resources/**")
 			.addResourceLocations(PATH_RESOURCE_LOCATIONS);

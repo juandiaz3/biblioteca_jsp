@@ -1,12 +1,16 @@
 package com.springjsp.basico.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
@@ -37,7 +41,7 @@ import com.springjsp.basico.service.ILibroService;
 @RequestMapping(value = "/libros")
 public class LibroController {
 	
-//	private static final Log logger = LogFa
+	private static final Logger log = LoggerFactory.getLogger(LibroController.class);
 	
 	@Autowired
 	private  ILibroService libroService;
@@ -47,6 +51,8 @@ public class LibroController {
 	
 	@Autowired
 	private IEditorialService editorialService;
+	
+	private static final String ROOT_PATH_FILES = "C://Temp/uploads";
 	
 	@GetMapping(value="/indexLibros")
 	public String listaLibros(Model model) {
@@ -108,27 +114,49 @@ public class LibroController {
 		}
 		
 		if(!filePortada.isEmpty()) {
+			
+			log.info("Modificación de imagen " + libro.getPortada());
+			
+			if(libro.getIdLibro() != null && libro.getIdLibro() > 0) {
+				
+				log.info("Modificación de imagen " + libro.getPortada());
+				
+				Path rootPath = Paths.get(ROOT_PATH_FILES).resolve(libro.getPortada());
+				File archivo = rootPath.toFile();
+				
+				if(archivo.exists() && archivo.canRead()) {
+					archivo.delete();
+				}
+			}
+			
+			
 			// Ruta de almacenamiento de las imágenes
 //			Path directorioRecursos = Paths.get("src//main//resources//static/uploads");
 			// Convertir Path a String
 //			String rootPath = directorioRecursos.toFile().getAbsolutePath();
-			String rootPath = "C://Temp/uploads";
+			String rootPath = ROOT_PATH_FILES;
 			
-			System.out.println("Root path " + rootPath);
+			String uniqueFileName = UUID.randomUUID().toString() + "_" + filePortada.getOriginalFilename();
+			
+			log.info("Root path " + rootPath);
 			
 			try {
+				// 1 - Crear archivo mediante Files.write
 				// Obtener los bytes del archivo recibido del formulario
 				byte[] bytes = filePortada.getBytes();
 				// Agregar el nombre del archivo seleccionado a la ruta
-				Path rutaCompleta = Paths.get(rootPath + "//" + filePortada.getOriginalFilename());
-				
-				System.out.println("rutaCompleta " + rutaCompleta);
-				
+				Path rutaCompleta = Paths.get(rootPath + "//" + uniqueFileName);
 				// Escribir el contenido del fichero en el archivo creado
 				Files.write(rutaCompleta, bytes);
-				attributes.addFlashAttribute("info", "Has subido el archivo " + filePortada.getOriginalFilename());
 				
-				libro.setPortada(filePortada.getOriginalFilename());
+				log.info("ruta completa " + rutaCompleta);
+				
+				// 2 - Crear archivo mediate Files.copy
+//				Files.copy(filePortada.getInputStream(), rootPath);
+				
+				attributes.addFlashAttribute("info", "Has subido el archivo " + uniqueFileName);
+				
+				libro.setPortada(uniqueFileName);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -167,8 +195,19 @@ public class LibroController {
 	public String borrarLibro(@PathVariable("idLibro") Integer idLibro, RedirectAttributes attributes) {
 		
 		if(idLibro > 0) {
+			Libro libroDelete = libroService.findById(idLibro);
+			
 			libroService.delete(idLibro);
 			attributes.addFlashAttribute("mensaje", "El libro se ha borrado correctamente");
+			
+			Path rootPath = Paths.get(ROOT_PATH_FILES).resolve(libroDelete.getPortada());
+			File archivo = rootPath.toFile();
+			
+			if(archivo.exists() && archivo.canRead()) {
+				if(archivo.delete()) {
+					attributes.addFlashAttribute("info", "Foto " + libroDelete.getPortada() + " eliminada con éxito");
+				}
+			}
 		}
 		
 		return "redirect:/libros/indexLibros";

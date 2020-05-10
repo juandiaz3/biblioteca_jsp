@@ -19,7 +19,7 @@ public class Libro implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idLibro;
+	private Integer idLibro;
 	@Column(nullable = false)
 	private String titulo;
 	
@@ -32,11 +32,11 @@ public class Libro implements Serializable {
 	public Libro() {
 	} 
 
-	public int getIdLibro() {
+	public Integer getIdLibro() {
 		return idLibro;
 	}
 
-	public void setIdLibro(int idLibro) {
+	public void setIdLibro(Integer idLibro) {
 		this.idLibro = idLibro;
 	}
 

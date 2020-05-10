@@ -50,9 +50,21 @@
 <!-- 			</div> -->
 			<div class="form-group">
 				<label for="filePortada">Portada</label>
-<%-- 				<form:input class="form-control" type="text" id="portada" path="portada" name="portada"/> --%>
-				<input class="form-control" type="file" id="filePortada" path="filePortada" name="filePortada"/>
+				<form:input class="form-control" type="hidden" id="portada" path="portada" name="portada"/>
+				<c:choose>
+					<c:when test="${not empty libro.portada}">
+						<input class="form-control" type="file" id="filePortada" path="filePortada" name="filePortada" value="${urlPublic}/${libro.portada}">
+							${libro.portada}
+						</input>
+					</c:when>
+					<c:otherwise>
+						<input class="form-control" type="file" id="filePortada" path="filePortada" name="filePortada"/>
+					</c:otherwise>
+				</c:choose>
 			</div>
+			
+			<img src="${urlPublic}/${libro.portada}" />
+			
 			<div class="form-group">
 				<label for="autor">Autor</label>
 				<form:select id="autor" class="form-control" path="autor" name="autor">
@@ -70,3 +82,12 @@
 
 </body>
 </html>
+
+<script>
+	$(document).ready(function(){
+		let imagen = ${libro.portada};
+		if(imagen.length > 0){
+			console.log("El libro ya tiene portada " + ${libro.portada});
+		}
+	});
+</script>
