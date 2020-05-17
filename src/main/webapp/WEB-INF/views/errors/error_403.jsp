@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charsetUTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="../includes/init.jsp"%>
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Libros</title>
 <spring:url value="/resources" var="urlPublic" />
 <link rel="stylesheet" href="${urlPublic}/bootstrap-4.4.1-dist/css/bootstrap.min.css">
@@ -20,7 +20,7 @@
 			<div class="card-header">Error: Acceso Denegado</div>
 			<div class="card-body">
 				<h5 class="card-title">
-					No tiene permisos para acceder a esta página
+					No tiene permisos para acceder a esta pÃ¡gina
 <%-- 					<span>${#httpServletRequest.remoteUser}</span> --%>
 <%-- 					<span>${#authentication.name}</span> --%>
 				</h5>

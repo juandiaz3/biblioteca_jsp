@@ -6,26 +6,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "perfil")
+/*
+ * Entidad creada para realizar prueba de relación muchos a muchos con la entidad Usuario2
+ */
+@Entity
+@Table(name = "perfiles")
 public class Perfil implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idPerfil;
+	private Integer idPerfil;
 	private String perfil;
 	
 	public Perfil() {
 	}
 
-	public int getIdPerfil() {
+	public Integer getIdPerfil() {
 		return idPerfil;
 	}
 
-	public void setIdPerfil(int idPerfil) {
+	public void setIdPerfil(Integer idPerfil) {
 		this.idPerfil = idPerfil;
 	}
 

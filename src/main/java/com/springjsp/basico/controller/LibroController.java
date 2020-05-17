@@ -107,7 +107,6 @@ public class LibroController {
 	
 	@PostMapping(value = "/nuevoLibro")
 	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, @RequestParam("filePortada") MultipartFile filePortada, RedirectAttributes attributes) {
-//	public String nuevoLibro(@ModelAttribute Libro libro, BindingResult result, Model model, RedirectAttributes attributes) {
 		
 		if(result.hasErrors()) {
 			return "libro/formLibro";
